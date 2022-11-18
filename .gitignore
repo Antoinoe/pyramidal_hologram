@@ -1,0 +1,14 @@
+syntax: glob
+Library
+Temp
+*.userprefs
+*.csproj
+*.unityproj
+*.sln
+*.orig
+*.orig.meta
+.DS_Store
+.*.swp
+*~
+Builds
+build
