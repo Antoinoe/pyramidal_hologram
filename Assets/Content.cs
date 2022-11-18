@@ -5,7 +5,7 @@ using UnityEngine;
 public class Content : MonoBehaviour
 {
     private List<GameObject> _items;
-    [SerializeField] private int _currentIndexActivated;
+    private int _currentIndexActivated;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class Content : MonoBehaviour
             print($"{n.name} : {n.activeSelf.ToString()}");
         }
     }
-    //
+    
     // public GameObject GetNextItem(int i)
     // {
     //     if (i++ > transform.childCount) i = 0;
