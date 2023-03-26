@@ -83,13 +83,14 @@ public class APIConnector : MonoBehaviour
             isHandShowed = true;
             if (!wasHandShowed)
             {
+                //user has its hands visible by the LeapMotion Device
                 StartCoroutine(SendRequest("OnLed3"));
                 _hologramContent.ActivateItem(_hologramContent.GetNextItem());
             }
-            
         }
         else
         {
+            //user has its hands out of the LeapMotion Device's vision
             isHandShowed = false;
             if(wasHandShowed) StartCoroutine(SendRequest("OffLed3"));
         }
@@ -98,8 +99,10 @@ public class APIConnector : MonoBehaviour
 
     public IEnumerator SendRequest(string msg, [Optional] int delay)
     {
+        //delay mainly use when turning all leds off in the beginning 
         yield return new WaitForSeconds(delay);
         Debug.Log($"start request : {msg}");
+        //creates a http request with the action the ESP32 needs to operate (ex : msg = "OnLed1")
         var request = UnityWebRequest.Get($"http://{ip}/{msg}/");
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.ConnectionError)
@@ -109,6 +112,7 @@ public class APIConnector : MonoBehaviour
         else
         {
             var answer = request.downloadHandler.text;
+            //print to the editor console the answer of the ESP32. For now it just prints the message sent by Unity.
             Debug.Log($"{answer}");
         }
     }
